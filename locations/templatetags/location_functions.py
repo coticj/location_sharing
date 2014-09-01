@@ -5,6 +5,7 @@ register = template.Library()
 
 @register.simple_tag
 
+
 def get_distance(lat1,lon1,lat2,lon2):
 	R = 6373.0
 	
