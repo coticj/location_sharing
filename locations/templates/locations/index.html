@@ -28,5 +28,13 @@
 {% else %}
     <p>No users</p>
 {% endif %}
-
+There are currently {{p}} unique users on the site.
+<table>
+{% for hour in hours %}
+		<tr>
+			<td>{{ hour.time }}</td>
+			<td>{{ hour.c }}</td>
+		</tr>
+    {% endfor %}
+</table
 {% include "locations/footer.html" %}
