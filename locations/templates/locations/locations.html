@@ -1,0 +1,40 @@
+{% include "locations/header.html" %}
+{% load location_functions %}
+{% if user_list %}
+    <table>
+		<thead>
+			<tr>
+				<th>User IP</th>
+				<th>Location</th>
+				<th>Coordinates</th>
+				<th>Email</th>
+				<th>Date visited</th>
+				<th>Distance</th>
+			</tr>
+		</thead>
+		<tbody>
+    {% for user in user_list %}
+		<tr>
+			<td>{{ user.user_ip }}</td>
+			<td>{{ user.location }}</td>
+			<td>{{ user.lat }}, {{ user.lon }}</td>
+			<td>{{ user.email }}</td>
+			<td>{{ user.visit_date }}</td>
+			<td>{% get_distance lat lon user.lat user.lon %} km</td>
+		</tr>
+    {% endfor %}
+		</tbody>
+    </table>
+{% else %}
+    <p>No users</p>
+{% endif %}
+There are currently {{p}} unique users on the site.
+<table>
+{% for hour in hours %}
+		<tr>
+			<td>{{ hour.time }}</td>
+			<td>{{ hour.c }}</td>
+		</tr>
+    {% endfor %}
+</table
+{% include "locations/footer.html" %}

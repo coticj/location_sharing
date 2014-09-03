@@ -1,7 +1,5 @@
 from django.db import models
 
-# Create your models here.
-
 class Location(models.Model):
 	user_ip = models.CharField(max_length=200)
 	location = models.CharField(max_length=200)
