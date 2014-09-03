@@ -1,15 +1,20 @@
 {% include "locations/header.html" %}
 {% load location_functions %}
 {% if user_list %}
-    <table>
+    
+	<h1>Welcome {{username}}</h1>
+	
+	<p>There are currently {{p}} unique users on the site.</p>
+	
+	<h2>All visitors and their location</h2>
+	<table id="mainTable">
 		<thead>
 			<tr>
 				<th>User IP</th>
 				<th>Location</th>
 				<th>Coordinates</th>
-				<th>Email</th>
-				<th>Date visited</th>
-				<th>Distance</th>
+				<th>Last visit</th>
+				<th data-sort="int">Distance from you</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -18,7 +23,6 @@
 			<td>{{ user.user_ip }}</td>
 			<td>{{ user.location }}</td>
 			<td>{{ user.lat }}, {{ user.lon }}</td>
-			<td>{{ user.email }}</td>
 			<td>{{ user.visit_date }}</td>
 			<td>{% get_distance lat lon user.lat user.lon %} km</td>
 		</tr>
@@ -28,13 +32,35 @@
 {% else %}
     <p>No users</p>
 {% endif %}
-There are currently {{p}} unique users on the site.
+<h2>Unique visitors by hours for the previous day</h2>
 <table>
+	<thead>
+		<tr>
+			<th>Hour of the day</th>
+			<th>Unique visitor count</th>
+		</tr>
+	</thead>
+	<tbody>
 {% for hour in hours %}
 		<tr>
 			<td>{{ hour.time }}</td>
 			<td>{{ hour.c }}</td>
 		</tr>
     {% endfor %}
-</table
+	</tbody>
+</table>
+
+<script>
+$( document ).ready(function() {
+	//start the table sorter
+    $("#mainTable").stupidtable();
+	
+	//initial sort by distance
+	$("#mainTable").find("th").eq(4).click(); 
+});
+
+</script>
+
+
+
 {% include "locations/footer.html" %}

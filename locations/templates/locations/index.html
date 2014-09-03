@@ -10,11 +10,16 @@ There were {{total}} active users on the site in the past 5 minutes.
 To see other users location and to share yours, please enter your email address.
 </p>
 <form id="email_form" method="post" action="/">
-	<input name="email" type="text" />
+	<input  type="email" name="email" required />
 	{%csrf_token%}
 	<input type="submit" value="submit">
 </form>
-post:
-{{t}}
+
+<script>
+$( document ).ready(function() {
+  $("#email_form").validate();
+});
+
+</script>
 
 {% include "locations/footer.html" %}
